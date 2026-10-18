@@ -1,0 +1,1535 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins",sans-serif;
+}
+
+body {
+    background-color: #0b0e0c;
+    position: relative;
+    width: 100vw; /* Ocupa todo el ancho de la ventana */
+    height: 100vh; /* Ocupa todo el alto de la ventana */
+    margin: 0; /* Elimina márgenes */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    overflow-x: hidden; /* Evita el scroll horizontal no deseado */
+    display: flex;
+    flex-direction: column; /* Asegura que el footer esté al final */
+    min-height: 100vh; /* Ocupa toda la altura de la ventana */
+    padding: 0; /* Elimina cualquier padding residual */
+}
+
+/* Asegúrate de que el body ocupe toda la altura de la ventana */
+body {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+    margin: 0; /* Elimina márgenes */
+}
+
+/* El contenedor principal debe ocupar el espacio restante */
+main {
+    flex: 1; /* Hace que el contenido principal ocupe el espacio disponible */
+    padding: 0; /* Elimina el padding adicional */
+    margin: 0; /* Elimina cualquier margen */
+}
+
+/* El footer permanece al final */
+footer {
+    margin: 0; /* Asegura que no haya espacio entre el main y el footer */
+    padding: 20px; /* Mantiene el padding interno del footer */
+    background: linear-gradient(to right, #011312, #084440, #051d1d);
+    color: #fff;
+    text-align: center;
+    
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+}
+/*header_________________________________________________________________________________*/
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.3rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    font-size: 0.9rem;
+    min-height: 50px; /* Establece una altura mínima */
+    max-height: 70px; /* Establece una altura máxima */
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+    transition: .5s;
+}
+
+.header:hover::after {
+    left: 100%;
+}
+
+.logo {
+    font-size: 2rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    height: 50px;
+}
+
+.logo img {
+    width: auto;
+    max-width: 80px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.925));
+}
+
+.navbar a {
+    font-size: 0.8rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 2rem;
+    transition: transform 0.1s ease, color 0.3s ease;
+    display: inline-block;
+    text-shadow: 0 2px 5px rgba(192, 158, 4, 0.925); /* Sombra para destacar el texto */
+}
+
+.navbar a:hover {
+    transform: scale(1.15); /* Incrementa ligeramente el efecto de agrandamiento */
+    color: rgba(192, 158, 4, 0.925); /* Mantiene el color al pasar el cursor */
+    text-shadow: 0 4px 8px rgba(192, 158, 4, 0.925); /* Aumenta la intensidad de la sombra */
+    transition: transform 0.3s ease-in-out, color 0.3s ease, text-shadow 0.3s ease; /* Transiciones más rápidas y suaves */
+    position: relative;
+}
+
+.navbar a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgba(192, 158, 4, 0.925);
+    transition: width 0.4s ease, background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: rgba(192, 158, 4, 0.925); /* Mantiene el color al pasar el cursor */
+    text-shadow: 0 4px 8px rgba(192, 158, 4, 0.925); /* Aumenta la intensidad de la sombra */
+}
+
+.navbar a:hover::after {
+    width: 100%; /* Anima la línea subrayada */
+    background-color: rgb(202, 132, 27); /* Cambia el color de la línea al pasar el cursor */
+}
+
+#check {
+    display: none;
+}
+
+.icons {
+    position: absolute;
+    right: 5%;
+    font-size: clamp(2rem, 2.5vw, 2.8rem); /* Responsive font size */
+    color: #ffffff; /* White color for better contrast */
+    cursor: pointer;
+    display: none;
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+.icons:hover {
+    transform: scale(1.2); /* Slight enlargement on hover */
+    color: rgba(192, 158, 4, 0.925) /* Light blue color on hover */
+}
+
+@media (max-width: 992px) {
+    .header {
+        padding: clamp(1rem, 2vw, 1.3rem) clamp(3%, 5vw, 5%);
+    }
+}
+
+@media (max-width: 768px) {
+    .icons {
+        display: inline-flex;
+    }
+
+    #check:checked~.icons #menu-icon {
+        display: none;
+    }
+
+    .icons #close-icon {
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        max-height: none;
+        overflow: hidden;
+        background: rgba(0, 0, 0, .1);
+        backdrop-filter: blur(50px);
+        z-index: -1;
+        transition: .3s ease;
+    }
+
+    #check:checked~.navbar {
+        height: auto;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
+        margin: clamp(0.8rem, 2vw, 1.5rem) 0;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .3s ease;
+    }
+
+    #check:checked~.navbar a {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.15s * var(--i));
+    }
+
+    .logo img {
+        width: clamp(80px, 10vw, 100px);
+        height: clamp(80px, 10vw, 100px);
+        object-fit: contain;
+    }
+
+    .logo {
+        position: static;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: clamp(80px, 10vw, 100px);
+        height: clamp(80px, 10vw, 100px);
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 576px) {
+    .home .content h1 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .home .content p {
+        font-size: clamp(0.8rem, 2vw, 0.9rem);
+        line-height: clamp(1.2, 2vw, 1.3);
+    }
+
+    .home .content img {
+        width: clamp(100px, 20vw, 150px);
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.925));
+    }
+
+    .pie-pagina .grupo-1 .box {
+        width: clamp(70%, 90%, 80%);
+        margin: 10px auto;
+    }
+
+    .pie-pagina .grupo-1 {
+        gap: clamp(5px, 2vw, 10px);
+    }
+
+    .logo img {
+        max-width: clamp(100px, 15vw, 140px);
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.973));
+        height: auto;
+    }
+}
+
+.recognition-page {
+    --awards-paper: #f3f0e8;
+    --awards-muted: #d0d1ca;
+    --awards-accent: #f3ad83;
+    --awards-line: rgba(243, 240, 232, 0.2);
+    width: 100%;
+    color: var(--awards-paper);
+}
+
+.recognition-hero {
+    position: relative;
+    display: flex;
+    min-height: 500px;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding: 140px max(7vw, 30px) 64px;
+    isolation: isolate;
+}
+
+.recognition-hero::before {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    inset: 78px 0 0;
+    background: linear-gradient(90deg, rgba(10, 12, 12, 0.9), rgba(10, 12, 12, 0.57) 58%, rgba(10, 12, 12, 0.22));
+}
+
+.recognition-kicker {
+    margin: 0 0 18px;
+    color: var(--awards-accent);
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.recognition-hero h1 {
+    max-width: 850px;
+    margin: 0;
+    color: var(--awards-paper);
+    font-size: 4.8rem;
+    font-weight: 600;
+    line-height: 0.98;
+    text-shadow: none;
+    text-transform: uppercase;
+    animation: recognition-entry 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.recognition-description {
+    max-width: 730px;
+    margin: 24px 0 0;
+    color: var(--awards-muted);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.75;
+    text-align: left;
+    text-shadow: none;
+}
+
+.recognition-summary {
+    display: flex;
+    max-width: 730px;
+    align-items: center;
+    gap: 34px;
+    margin-top: 32px;
+    padding-top: 22px;
+    border-top: 1px solid var(--awards-line);
+}
+
+.recognition-summary p {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    margin: 0;
+    color: var(--awards-muted);
+    font-size: 0.82rem;
+}
+
+.recognition-summary strong {
+    color: var(--awards-paper);
+    font-family: "Barlow Condensed", sans-serif !important;
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.recognition-summary a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--awards-accent);
+    font-size: 0.84rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.recognition-summary a:hover {
+    color: var(--awards-paper);
+}
+
+.recognition-story {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 36px 38px;
+}
+
+.recognition-story details {
+    border-top: 1px solid var(--awards-line);
+    border-bottom: 1px solid var(--awards-line);
+}
+
+.recognition-story summary {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    color: var(--awards-paper);
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 600;
+    list-style: none;
+}
+
+.recognition-story summary::-webkit-details-marker {
+    display: none;
+}
+
+.recognition-story summary::after {
+    color: var(--awards-accent);
+    content: "+";
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.recognition-story details[open] summary::after {
+    content: "−";
+}
+
+.recognition-story__content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    padding: 4px 0 28px;
+    animation: recognition-entry 300ms ease both;
+}
+
+.recognition-story__content h2 {
+    margin: 0 0 12px;
+    color: var(--awards-accent);
+    font-size: 1.55rem;
+    font-weight: 600;
+}
+
+.recognition-story__content p {
+    margin: 0 0 12px;
+    color: var(--awards-muted);
+    font-size: 0.91rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.7;
+    text-shadow: none;
+}
+
+.awards-gallery {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 36px 92px;
+}
+
+.awards-gallery__header {
+    max-width: 760px;
+    margin: 0 0 30px;
+}
+
+.awards-gallery__header .recognition-kicker {
+    margin-bottom: 10px;
+}
+
+.awards-gallery__header h2 {
+    margin: 0;
+    color: var(--awards-paper);
+    font-size: 3.4rem;
+    font-weight: 600;
+    line-height: 1;
+    text-align: left;
+    text-shadow: none;
+}
+
+.awards-gallery__header > p:last-child {
+    margin: 12px 0 0;
+    color: var(--awards-muted);
+    font-size: 0.94rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.6;
+    text-align: left;
+    text-shadow: none;
+}
+
+.award-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 14px;
+    padding: 0;
+}
+
+.award-grid > div {
+    display: grid;
+    min-width: 0;
+    min-height: 218px;
+    place-items: center;
+    padding: 16px;
+    border: 1px solid rgba(243, 240, 232, 0.18);
+    border-radius: 4px;
+    background: rgba(11, 14, 13, 0.88);
+    filter: none;
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.award-grid > div:hover {
+    z-index: 1;
+    border-color: rgba(243, 173, 131, 0.72);
+    background: rgba(16, 20, 18, 0.98);
+    transform: translateY(-3px);
+}
+
+.award-grid > .laureles-oscuros {
+    border-color: rgba(255, 255, 255, 0.58);
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.award-grid > .laureles-oscuros:hover {
+    border-color: var(--awards-accent);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.award-grid > div:focus-visible {
+    outline: 2px solid var(--awards-accent);
+    outline-offset: 3px;
+}
+
+.award-grid img {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    max-height: 182px;
+    height: auto;
+    margin: auto;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: zoom-in;
+    object-fit: contain;
+    transition: transform 180ms ease;
+}
+
+.award-grid > div:hover img {
+    transform: scale(1.04);
+}
+
+.award-dialog {
+    position: fixed;
+    width: min(880px, calc(100% - 32px));
+    max-width: none;
+    height: min(820px, calc(100vh - 32px));
+    max-height: none;
+    margin: auto;
+    padding: 52px 24px;
+    overflow: hidden;
+    border: 1px solid var(--awards-line);
+    border-radius: 4px;
+    background: #0b0e0c;
+    color: var(--awards-paper);
+}
+
+.award-dialog[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.award-dialog--light {
+    border-color: rgba(16, 20, 18, 0.2);
+    background: rgba(243, 240, 232, 0.92);
+    color: #101412;
+}
+
+.award-dialog--light .award-dialog__close {
+    border-color: rgba(16, 20, 18, 0.24);
+    color: #101412;
+}
+
+.award-dialog--light .award-dialog__close:hover {
+    border-color: #e47753;
+    color: #e47753;
+}
+
+.award-dialog::backdrop {
+    background: rgba(4, 6, 5, 0.9);
+    backdrop-filter: blur(8px);
+}
+
+.award-dialog img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    flex: 0 1 auto;
+    margin: 0;
+    object-fit: contain;
+}
+
+.award-dialog__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--awards-line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--awards-paper);
+    cursor: pointer;
+}
+
+.award-dialog__close:hover {
+    border-color: var(--awards-accent);
+    color: var(--awards-accent);
+}
+
+@keyframes recognition-entry {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 760px) {
+    .recognition-hero {
+        min-height: 460px;
+        padding: 122px 24px 52px;
+    }
+
+    .recognition-hero h1 {
+        max-width: 600px;
+        font-size: 3.5rem;
+    }
+
+    .recognition-description {
+        margin-top: 18px;
+        font-size: 0.94rem;
+    }
+
+    .recognition-summary {
+        flex-wrap: wrap;
+        gap: 18px 26px;
+        margin-top: 24px;
+        padding-top: 17px;
+    }
+
+    .recognition-story {
+        padding: 0 24px 30px;
+    }
+
+    .recognition-story__content {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .awards-gallery {
+        padding: 24px 24px 64px;
+    }
+
+    .awards-gallery__header h2 {
+        font-size: 2.8rem;
+    }
+
+    .award-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .award-grid > div {
+        min-height: 170px;
+        padding: 11px;
+    }
+
+    .award-grid img {
+        max-height: 145px;
+    }
+}
+
+@media (max-width: 380px) {
+    .recognition-hero,
+    .recognition-story,
+    .awards-gallery {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .recognition-hero h1 {
+        font-size: 3rem;
+    }
+
+    .award-grid > div {
+        min-height: 148px;
+        padding: 8px;
+    }
+
+    .award-grid img {
+        max-height: 126px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .recognition-hero h1,
+    .recognition-story__content {
+        animation: none;
+    }
+
+    .award-grid > div,
+    .award-grid img {
+        transition: none;
+    }
+}
+
+/*end-Header_____________________________________________________________________________*/
+/*body___________________________________________________________________________________*/
+
+.vacio {
+    width: 100%;
+    height: 80px;
+}
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para profundidad */
+}
+
+.home-header h1 {
+    font-size: 1rem;
+    color: #ffffff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); /* Sombra para destacar */
+    margin-bottom: 10px;
+}
+
+.home-header p {
+    font-size: 1rem;
+    color: #dcdcdc;
+    line-height: 1.6;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
+}
+
+.home-media-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Espaciado entre íconos */
+
+}
+
+.home-media-icons a {
+    font-size: 1.8rem;
+    color: #ffffff;
+    transition: transform 0.3s ease, color 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); /* Sombra para destacar */
+    filter: drop-shadow(0 0 5px rgba(255, 253, 255, 0.973)); /* Sombra blanca para destacar */
+}
+
+.home-media-icons a:hover {
+    transform: scale(1.2);
+    color: #d4af37; /* Color oro al pasar el cursor */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .home-header h1 {
+        font-size: 1.5rem; /* Reduce el tamaño del texto */
+    }
+
+    .home-header p {
+        font-size: 0.9rem; /* Reduce el tamaño del texto */
+    }
+
+    .home-media-icons a {
+        font-size: 1.5rem; /* Reduce el tamaño de los íconos */
+    }
+}
+
+@media (max-width: 576px) {
+    .home {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .home-header h1 {
+        font-size: 1.2rem; /* Ajusta aún más el tamaño del texto */
+    }
+
+    .home-header p {
+        font-size: 0.8rem; /* Ajusta aún más el tamaño del texto */
+    }
+
+    .home-media-icons a {
+        font-size: 1.2rem; /* Ajusta aún más el tamaño de los íconos */
+    }
+}
+
+.home .content {
+    z-index: 888;
+    color: #fff;
+    width: clamp(60%, 70%, 90%);
+    margin-top: clamp(30px, 5vw, 50px);
+    opacity: 0;
+    animation: entrada 7s 8s forwards;
+    font-size: clamp(0.8rem, 1.5vw, 1rem); /* Ajusta el tamaño del texto */
+    line-height: clamp(1.4, 2vw, 1.8); /* Ajusta el espaciado entre líneas */
+}
+
+span {
+    color: rgb(245, 184, 184);
+}
+
+/*media icons*/
+
+.home .media-icons {
+    z-index: 888;
+    position: absolute;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s ease;
+}
+
+.home .media-icons a {
+    color: #ffffffc9;
+    font-size: 1.6em;
+    transition: 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); /* Agrega sombras oscuras */
+}
+
+.home .media-icons a:not(:last-child){
+    margin-bottom: 20px;
+} 
+
+.home .media-icons a:hover{
+    transform: scale(1.8);
+    color: rgb(180, 36, 103);
+}
+
+@media (max-width: 1040px){
+    header{
+        padding: 12px 20px;
+    }
+
+    .home .media-icons{
+        right: 15px;
+    }
+
+    header .navigation{
+        position: relative;
+        display: none;
+    }
+}
+
+
+
+/* Main _________________________________________________________________*/
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px; /* Espacio alrededor del contenido */
+}
+
+.modern-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 40px 40px 40px; /* Espacio alrededor del contenido */
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+}
+
+/* Estilo de texto con color oro */
+.texto-oro {
+    color: #d4af37; /* Color oro */
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 10px #d4af37; /* Sombra para resaltar */
+    font-size: clamp(1rem, 2.5vw, 1.2rem); /* Ajusta el tamaño del texto de forma responsiva */
+    letter-spacing: clamp(0.5px, 1vw, 1px); /* Espaciado entre letras responsivo */
+    text-transform: uppercase; /* Convertir texto a mayúsculas */
+}
+
+/* Aplica el estilo al título principal */
+.title {
+    width: 100%;
+    color: #ffffff; /* Color oro */
+    text-shadow: 0 1px 3px rgba(223, 202, 13, 0.5), 0 0 10px #d4af37;
+    font-size: clamp(1.5rem, 3vw, 2rem); /* Ajusta el tamaño del texto de forma responsiva */
+    font-weight: bold; /* Resalta el texto */
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Aplica el estilo al texto de descripción */
+.description {
+    width: 100%;
+    color: #ffffff; /* Color oro */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 10px #d4af37;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem); /* Ajusta el tamaño del texto de forma responsiva */
+    font-weight: bold; /* Resalta el texto */
+    text-align: center; /* Centra el texto */
+    margin-bottom: clamp(15px, 2vw, 20px); /* Espacio inferior responsivo */
+    line-height: clamp(1.4, 2vw, 1.6); /* Espaciado entre líneas responsivo */
+    letter-spacing: clamp(0.5px, 1vw, 1px); /* Espaciado entre letras responsivo */
+}
+
+.contenido-oculto{
+    display: none; /* Oculta el contenido por defecto */
+    width: 100%;
+    padding: 20px; /* Espacio alrededor del contenido */
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+}
+
+.cta-button {
+    display: inline-block;
+    padding: clamp(5px, 1vw, 10px) clamp(10px, 2vw, 15px); /* Ajusta el tamaño del padding de forma responsiva */
+    font-size: clamp(0.8rem, 1.5vw, 1rem); /* Ajusta el tamaño de la fuente de forma responsiva */
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to right, #d4af37, #b8860b);
+    border: none;
+    border-radius: clamp(3px, 0.5vw, 5px); /* Ajusta el radio de los bordes de forma responsiva */
+    cursor: pointer;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Reduce la sombra */
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #b8860b, #d4af37);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ajusta la sombra al pasar el cursor */
+}
+
+.cta-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Reduce aún más la sombra al hacer clic */
+}
+
+.extra-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: clamp(10px, 2vw, 20px) clamp(50px, 5vw, 100px); /* Espacio alrededor del contenido responsivo */
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    border-radius: clamp(5px, 1vw, 10px); /* Bordes redondeados responsivos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+}
+
+h3 {
+    color: #ffffff; /* Color oro */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 10px #d4af37;
+    font-size: 1.2rem; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Resalta el texto */
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espacio inferior */
+    line-height: 1.5; /* Espaciado entre líneas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+.extra-text .quienes-somos p {
+    color: #ffffff; /* Color oro */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 10px #d4af37;
+    font-size: 1rem; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Resalta el texto */
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espacio inferior */
+    line-height: 1.5; /* Espaciado entre líneas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+.texto-oculto {
+    padding: clamp(10px, 2vw, 20px); /* Espacio interno responsivo */
+    background: rgba(0, 0, 0, 0.1); /* Fondo semitransparente */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    border-radius: clamp(5px, 1vw, 10px); /* Bordes redondeados responsivos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    margin-top: clamp(10px, 2vw, 20px); /* Espacio superior responsivo */
+    animation: fadeIn 0.5s ease-in-out; /* Animación de entrada */
+}
+
+.texto-oculto h3 {
+    color: #ffffff; /* Color oro */
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem); /* Tamaño del texto responsivo */
+    font-weight: bold; /* Resalta el texto */
+    text-align: center; /* Centra el texto */
+    margin-bottom: clamp(10px, 2vw, 15px); /* Espacio inferior responsivo */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), 0 0 10px rgba(212, 175, 55, 0.8); /* Sombra para destacar */
+}
+
+.texto-oculto p {
+    color: #ffffff; /* Color blanco */
+    font-size: clamp(0.9rem, 1.5vw, 1rem); /* Tamaño del texto responsivo */
+    font-weight: bold; /* Resalta el texto */
+    line-height: clamp(1.5, 2vw, 1.8); /* Espaciado entre líneas responsivo */
+    text-align: justify; /* Justifica el texto */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
+    margin-bottom: clamp(10px, 2vw, 15px); /* Espacio inferior responsivo */
+    letter-spacing: clamp(0.3px, 0.8vw, 0.5px); /* Espaciado entre letras responsivo */
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*end body________________________________________________________________________________*/
+/*footer__________________________________________________________________________________*/
+
+.pie-pagina {
+    width: 100%;
+    background: linear-gradient(to right, #011312, #084440, #011312);
+    padding: 20px 0;
+    color: #fff;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+    gap: 40px;
+    filter: drop-shadow(0 -2px 2px rgba(255, 255, 255, 0.8)); /* Línea blanca arriba del footer */
+}
+
+.pie-pagina .grupo-1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    gap: 5px;
+}
+
+.grupo-1 .box-1,
+.grupo-1 .box-2,
+.grupo-1 .box-3 {
+    margin: 0 auto;
+}
+
+.grupo-1 .box-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #011312, #084440, #051d1d);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: fit-content;
+    height: auto;
+}
+
+.grupo-1 .box-1 img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    width: clamp(100px, 15vw, 150px);
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.979));
+}
+
+.grupo-1 .box-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #011312, #084440, #051d1d);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grupo-1 .box-2 h2 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.grupo-1 .box-2 p {
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    line-height: 1.6;
+    color: #dcdcdc;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.grupo-1 .box-2 a:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.grupo-1 .box-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 150px;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #011312, #084440, #051d1d);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grupo-1 .box-3 h2 {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.grupo-1 .box-3 a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
+    gap: 20px;
+    background: linear-gradient(to right, #0a5d73, #1fc2d1);
+    color: #fff;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.925));
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.grupo-1 .box-3 a:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #00bfff, #1e90ff);
+}
+
+.pie-pagina .grupo-2 {
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #011312, #084440, #051d1d);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grupo-2 .pdf {
+    button {
+        background: linear-gradient(to right, #011312, #084440, #051d1d);
+        color: #fff;
+        font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+        font-weight: 600;
+        padding: clamp(5px, 1vw, 8px) clamp(10px, 2vw, 15px);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(to right, #084440, #011312, #084440);
+        filter: drop-shadow(0 0 5px rgba(39, 38, 3, 0.973));
+    }
+
+    button:active {
+        transform: scale(0.95);
+        filter: drop-shadow(0 0 5px rgba(13, 162, 207, 0.973));
+    }
+}
+
+.grupo-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #011312, #084440, #051d1d);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.grupo-3 .credito {
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .pie-pagina .grupo-1 {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .pie-pagina .grupo-1 .box {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .pie-pagina .grupo-2 {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .pie-pagina .grupo-3 {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .pie-pagina .grupo-3 .credito {
+        font-size: 0.8rem;
+    }
+
+    .pie-pagina .grupo-1 .box-1 img,
+    .pie-pagina .grupo-1 .box-2 img,
+    .pie-pagina .grupo-1 .box-3 img {
+        width: clamp(100px, 15vw, 150px);
+        height: auto;
+    }
+
+    .pie-pagina .grupo-1 .box-2 h2,
+    .pie-pagina .grupo-1 .box-3 h2 {
+        font-size: clamp(1.1rem, 2vw, 1.5rem);
+    }
+
+    .pie-pagina .grupo-1 .box-2 p {
+        font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    }
+
+    .pie-pagina .grupo-1 .box-3 a {
+        width: clamp(20px, 5vw, 30px);
+        height: clamp(20px, 5vw, 30px);
+        font-size: clamp(0.8rem, 1.5vw, 1rem);
+    }
+
+    .pie-pagina .grupo-2 button {
+        font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+        padding: clamp(5px, 1vw, 8px) clamp(10px, 2vw, 15px);
+    }
+
+    .pie-pagina .grupo-3 .credito {
+        font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .pie-pagina .grupo-1 {
+        gap: 15px;
+    }
+
+    .pie-pagina .grupo-1 .box {
+        width: 100%;
+    }
+
+    .pie-pagina .grupo-2 button {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    .pie-pagina .grupo-3 .credito {
+        font-size: 0.7rem;
+    }
+
+    .pie-pagina .grupo-1 .box-1 img,
+    .pie-pagina .grupo-1 .box-2 img,
+    .pie-pagina .grupo-1 .box-3 img {
+        width: 100px;
+    }
+
+    .pie-pagina .grupo-1 .box-2 h2,
+    .pie-pagina .grupo-1 .box-3 h2 {
+        font-size: 1.1rem;
+    }
+
+    .pie-pagina .grupo-1 .box-2 p {
+        font-size: 0.7rem;
+    }
+
+    .pie-pagina .grupo-1 .box-3 a {
+        width: 20px;
+        height: 20px;
+        font-size: 0.8rem;
+    }
+
+    .pie-pagina .grupo-2 button {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    .pie-pagina .grupo-3 .credito {
+        font-size: 0.7rem;
+    }
+}
+
+/*end-footer______________________________________________________________________________*/
+
+.laureles {
+    width: 70%; /* Reduce el ancho para alejarlo de los bordes */
+    height: 100%; /* Asegura que ocupe todo el espacio disponible */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px; /* Incrementa el espacio alrededor del contenido */
+}
+
+.laureles-title {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: #ffffff; /* Color oro */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 10px #d4af37;
+    font-size: 2rem; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Resalta el texto */
+    text-align: center; /* Centra el texto */
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    margin-bottom: 20px; /* Espacio inferior */
+    line-height: 1.5; /* Espaciado entre líneas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+@media (max-width: 768px) {
+    .laureles-title {
+        font-size: 1.5rem; /* Reduce el tamaño del texto para pantallas medianas */
+    }
+}
+
+@media (max-width: 576px) {
+    .laureles-title {
+        font-size: 1.2rem; /* Reduce aún más el tamaño del texto para pantallas pequeñas */
+    }
+}
+
+.laureles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas flexibles según el espacio disponible */
+    gap: 5px; /* Espaciado uniforme entre filas y columnas */
+    padding: 5px; /* Espaciado interno del contenedor */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra para mayor profundidad */
+    justify-items: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+}
+
+@media (max-width: 768px) {
+    .laureles-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas flexibles según el espacio disponible */
+    }
+}
+
+@media (max-width: 576px) {
+    .laureles-container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Columnas flexibles según el espacio disponible */
+    }
+}
+
+.laureles-container img {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 250px; /* Tamaño máximo de las imágenes */
+    height: auto; /* Mantiene las proporciones */
+    object-fit: contain; /* Asegura que las imágenes no se deformen */
+    border-radius: 10px; /* Bordes redondeados para las imágenes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar las imágenes */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+}
+
+@media (max-width: 768px) {
+    .laureles-container img {
+        max-width: 200px; /* Reduce el tamaño máximo de las imágenes */
+    }
+}
+
+@media (max-width: 576px) {
+    .laureles-container img {
+        max-width: 120px; /* Reduce aún más el tamaño máximo de las imágenes */
+    }
+}
+
+.laureles-container img:hover {
+    transform: scale(1.5); /* Efecto de zoom al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.9); /* Sombra más pronunciada al pasar el cursor */
+    z-index: 1; /* Asegura que la imagen esté por encima de otras */
+}
+
+.laureles-dorados{
+    filter: drop-shadow(0 0 5px rgba(255, 217, 0, 0.418)); 
+}
+
+.laureles-item{
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.973)); /* Sombra blanca para destacar */
+}
+
+.laureles-oscuros{
+    background-color: #ffffff10;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.959));
+}
+
+.laureles-oscuros:hover{
+    background-color: #ffffff20;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.959));
+    scale: 1.05; /* Efecto de zoom al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.9); /* Sombra más pronunciada al pasar el cursor */
+}
+
+.laureles-container p{
+    color: #ffffff; /* Color oro */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 10px #d4af37;
+    font-size: 1rem; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Resalta el texto */
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espacio inferior */
+    line-height: 1.5; /* Espaciado entre líneas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+.par-1 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Divide en dos columnas iguales */
+    gap: 30px; /* Espaciado entre columnas */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 100px 10px 100px; /* Espacio alrededor del contenido */
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+    text-align: center; /* Alinea los títulos al centro */
+}
+
+.par-2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Divide en dos columnas iguales */
+    gap: 30px; /* Espaciado entre columnas */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 100px 10px 100px; /* Espacio alrededor del contenido */
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+}
+
+.par-3 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Divide en una columna */
+    gap: 30px; /* Espaciado entre filas */
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    width: 100%;
+    padding: 20px 50px; /* Ajusta el padding para mayor espacio */
+    background: rgba(0, 0, 0, 0.2); /* Fondo más oscuro */
+    backdrop-filter: blur(20px); /* Aumenta el desenfoque */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Sombra más pronunciada */
+    align-content: center; /* Centra el contenido dentro del div */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+@media (max-width: 768px) {
+    .par-1, .par-2, .par-3 {
+        grid-template-columns: repeat(1, 1fr); /* Cambia a una sola columna */
+        padding: 15px; /* Reduce el padding */
+        gap: 20px; /* Ajusta el espaciado */
+    }
+
+    .par-1 h3, .par-2 h3, .par-3 h3 {
+        font-size: 1rem; /* Reduce el tamaño de los encabezados */
+    }
+
+    .par-1 p, .par-2 p, .par-3 p {
+        font-size: 0.9rem; /* Reduce el tamaño del texto */
+        line-height: 1.4; /* Ajusta el espaciado entre líneas */
+    }
+}
+
+@media (max-width: 576px) {
+    .par-1, .par-2, .par-3 {
+        padding: 10px; /* Reduce aún más el padding */
+        gap: 15px; /* Ajusta el espaciado */
+    }
+
+    .par-1 h3, .par-2 h3, .par-3 h3 {
+        font-size: 0.9rem; /* Reduce aún más el tamaño de los encabezados */
+    }
+
+    .par-1 p, .par-2 p, .par-3 p {
+        font-size: 0.8rem; /* Reduce aún más el tamaño del texto */
+        line-height: 1.3; /* Ajusta el espaciado entre líneas */
+    }
+}

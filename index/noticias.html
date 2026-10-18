@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Normalize/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/site-shell.css">
+    <link rel="stylesheet" href="../styles/noticias.css">
+    <link rel="icon" type="image/png" href="../image/Favicon icon/Alpataco-Favicon-2_png.ico" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="../image/Favicon icon/favicon.svg">
+    <link rel="shortcut icon" href="../image/Favicon icon/Alpataco-Favicon-2_png.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../image/Favicon icon/apple-touch-icon.png">
+    <link rel="manifest" href="../image/Favicon icon/site.webmanifest">
+    <meta name="description" content="Noticias de Alpataco Films: conoce nuestros proyectos, eventos y comparte tus comentarios con la comunidad.">
+    <title>Noticias | Alpataco Films</title>
+    <meta property="og:site_name" content="Alpataco Films">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:title" content="Noticias | Alpataco Films">
+    <meta property="og:description" content="Noticias de Alpataco Films: conoce nuestros proyectos, eventos y comparte tus comentarios con la comunidad.">
+    <meta property="og:url" content="https://alpatacofilms.com/index/noticias.html">
+    <meta property="og:image" content="https://alpatacofilms.com/image/nuevo%20contenido/Banner%20Principal%20Inicio%20%281%29.webp">
+    <meta property="og:image:alt" content="Escena de una proyección de cine, parte del universo visual de Alpataco Films.">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="news-page-body">
+    <header class="header">
+        <a class="logo" href="../index.html" aria-label="Alpataco Films, inicio">
+            <img src="../image/Nuevo logo alpataco/Logo Alpataco 1.png" alt="Alpataco Films" loading="lazy">
+        </a>
+        <input type="checkbox" id="check" aria-label="Alternar menú de navegación">
+        <label for="check" class="icons">
+            <i class="bi bi-list" id="menu-icon"></i>
+            <i class="bi bi-x-lg" id="close-icon"></i>
+        </label>
+        <nav class="navbar">
+            <a href="../index.html" style="--i:0">Inicio</a>
+            <a href="peliculas.html" style="--i:1">Películas</a>
+            <a href="galeria.html" style="--i:2">Galería</a>
+            <a href="Reconocimiento.html" style="--i:3">Reconocimientos</a>
+            <a href="noticias.html" style="--i:4" aria-current="page">Noticias</a>
+            <a href="contacto.html" style="--i:5">Contacto</a>
+        </nav>
+    </header>
+
+    <main class="news-main">
+        <section class="news-heading" aria-labelledby="news-title">
+            <p class="news-kicker">Alpataco Films · Comunidad</p>
+            <h1 id="news-title">Noticias</h1>
+            <p class="news-description">Aquí te contamos en qué estamos trabajando, dónde nos encontrarás y qué viene para nuestro cine.</p>
+        </section>
+
+        <section class="news-section" aria-labelledby="projects-title">
+            <h2 id="projects-title">Proyectos</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <p class="news-tag">En producción</p>
+                    <h3>Ena y el niño que vino del río</h3>
+                    <p>Drama familiar ambientado en la comunidad Sikuani, en el caño Iracá, Meta. Francisca encuentra a un niño abandonado y debe decidir si lo deja seguir río abajo o se hace responsable de él.</p>
+                </article>
+                <article class="news-card">
+                    <p class="news-tag">En producción</p>
+                    <h3>Aislados</h3>
+                    <p>Comedia romántica sobre dos ejecutivos rivales que deben trabajar juntos para sobrevivir en una isla desierta.</p>
+                </article>
+                <article class="news-card">
+                    <p class="news-tag">En producción</p>
+                    <h3>Una llave hacia el pasado</h3>
+                    <p>Después de seis años en prisión, Carlos debe enfrentar su pasado y decidir entre quedarse por su hijo o irse para siempre.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="news-section" aria-labelledby="events-title">
+            <h2 id="events-title">Eventos</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <p class="news-tag">Próximamente</p>
+                    <h3>Funciones, festivales y encuentros</h3>
+                    <p>Publicaremos aquí las fechas de nuestras próximas proyecciones y actividades. Vuelve pronto o déjanos un comentario para contarnos qué te gustaría ver.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="news-section" id="comentarios" aria-labelledby="comments-title">
+            <h2 id="comments-title">Comentarios</h2>
+            <form class="comment-form" data-comment-form novalidate>
+                <div class="comment-field">
+                    <label for="comment-name">Nombre</label>
+                    <input id="comment-name" name="nombre" type="text" maxlength="60" autocomplete="name" required>
+                </div>
+                <div class="comment-field">
+                    <label for="comment-message">Comentario</label>
+                    <textarea id="comment-message" name="mensaje" rows="4" maxlength="800" required></textarea>
+                </div>
+                <div class="comment-trap" aria-hidden="true">
+                    <label for="comment-website">Sitio web</label>
+                    <input id="comment-website" name="sitio_web" type="text" tabindex="-1" autocomplete="off">
+                </div>
+                <div class="comment-actions">
+                    <button type="submit" data-comment-submit>Publicar comentario</button>
+                    <p class="comment-status" role="status" aria-live="polite" data-comment-status></p>
+                </div>
+            </form>
+            <ul class="comment-list" data-comment-list aria-live="polite"></ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__main">
+            <a class="site-footer__brand" href="../index.html" aria-label="Volver al inicio">
+                <img src="../image/Nuevo logo alpataco/Logo Alpataco 1.png" alt="Alpataco Films">
+            </a>
+            <nav class="social-links" aria-label="Redes sociales">
+                <a href="https://www.facebook.com/profile.php?id=61556811579022" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/alpataco.films/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.youtube.com/@Alpatacofilms" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube" aria-hidden="true"></i></a>
+                <a href="https://www.threads.net/@alpataco.films" target="_blank" rel="noopener noreferrer" aria-label="Threads"><i class="bi bi-threads" aria-hidden="true"></i></a>
+                <a href="https://www.tiktok.com/@alpataco.films" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="bi bi-tiktok" aria-hidden="true"></i></a>
+                <a href="https://vimeo.com/alpatacofilms" target="_blank" rel="noopener noreferrer" aria-label="Vimeo"><i class="bi bi-vimeo" aria-hidden="true"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=3012361911&amp;text=Hola%2C%20vengo%20desde%20su%20sitio%20web%20y%20me%20gustar%C3%ADa%20chatear%20con%20ustedes." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="bi bi-whatsapp" aria-hidden="true"></i></a>
+            </nav>
+        </div>
+        <div class="site-footer__bottom">
+            <a class="privacy-link" href="../document/Politica_Proteccion_Datos_Alpataco_Films_SAS.pdf" target="_blank" rel="noopener noreferrer">Política de tratamiento de datos (PDF)</a>
+            <p>&copy; 2025 Alpataco Films S.A.S. · Todos los derechos reservados · <a class="credit-link" href="https://3etop.github.io/portafolio-2025/" target="_blank" rel="noopener noreferrer">Betto Rodriguez.</a></p>
+        </div>
+    </footer>
+
+    <script src="../scripts/noticias-config.js"></script>
+    <script src="../scripts/noticias.js" defer></script>
+</body>
+</html>
