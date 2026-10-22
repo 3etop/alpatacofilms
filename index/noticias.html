@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VBEFQL7RH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6VBEFQL7RH');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Normalize/normalize.css">
@@ -51,6 +59,20 @@
             <p class="news-description">Aquí te contamos en qué estamos trabajando, dónde nos encontrarás y qué viene para nuestro cine.</p>
         </section>
 
+        <section class="news-section" aria-labelledby="events-title">
+            <h2 id="events-title">Eventos</h2>
+            <div class="news-grid news-grid--events">
+                <article class="news-card news-card--split">
+                    <div class="news-media"><!-- Reemplaza este div por: <img src="../image/RUTA.webp" alt="Descripción" loading="lazy"> --><span>Espacio para imagen</span></div>
+                    <div class="news-text">
+                        <p class="news-tag">Próximamente</p>
+                        <h3>Funciones, festivales y encuentros</h3>
+                        <p>Publicaremos aquí las fechas de nuestras próximas proyecciones y actividades. Vuelve pronto o déjanos un comentario para contarnos qué te gustaría ver.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <section class="news-section" aria-labelledby="projects-title">
             <h2 id="projects-title">Proyectos</h2>
             <div class="news-grid">
@@ -68,17 +90,6 @@
                     <p class="news-tag">En producción</p>
                     <h3>Una llave hacia el pasado</h3>
                     <p>Después de seis años en prisión, Carlos debe enfrentar su pasado y decidir entre quedarse por su hijo o irse para siempre.</p>
-                </article>
-            </div>
-        </section>
-
-        <section class="news-section" aria-labelledby="events-title">
-            <h2 id="events-title">Eventos</h2>
-            <div class="news-grid">
-                <article class="news-card">
-                    <p class="news-tag">Próximamente</p>
-                    <h3>Funciones, festivales y encuentros</h3>
-                    <p>Publicaremos aquí las fechas de nuestras próximas proyecciones y actividades. Vuelve pronto o déjanos un comentario para contarnos qué te gustaría ver.</p>
                 </article>
             </div>
         </section>

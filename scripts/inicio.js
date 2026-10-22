@@ -42,13 +42,24 @@ if (heroAudio && audioButton) {
     const audioLabel = audioButton.querySelector("[data-audio-label]");
     const audioIcon = audioButton.querySelector("i");
 
+    const AUDIO_KEY = "alpataco-audio-on";
+
+    function showPlaying() {
+        audioButton.setAttribute("aria-pressed", "true");
+        audioLabel.textContent = "Silenciar sonido";
+        audioIcon.className = "bi bi-volume-mute";
+    }
+
+    async function startAudio() {
+        await heroAudio.play();
+        showPlaying();
+        localStorage.setItem(AUDIO_KEY, "1");
+    }
+
     audioButton.addEventListener("click", async () => {
         if (heroAudio.paused) {
             try {
-                await heroAudio.play();
-                audioButton.setAttribute("aria-pressed", "true");
-                audioLabel.textContent = "Silenciar sonido";
-                audioIcon.className = "bi bi-volume-mute";
+                await startAudio();
             } catch {
                 audioLabel.textContent = "Audio no disponible";
             }
@@ -57,10 +68,24 @@ if (heroAudio && audioButton) {
 
         heroAudio.pause();
         heroAudio.currentTime = 0;
+        localStorage.removeItem(AUDIO_KEY);
         audioButton.setAttribute("aria-pressed", "false");
         audioLabel.textContent = "Activar sonido";
         audioIcon.className = "bi bi-volume-up";
     });
+
+    // Si el navegador bloquea el autoplay, se reanuda con la primera interacción.
+    if (localStorage.getItem(AUDIO_KEY) === "1") {
+        startAudio().catch(() => {
+            const resume = (event) => {
+                if (audioButton.contains(event.target)) return;
+                cleanup();
+                if (heroAudio.paused && localStorage.getItem(AUDIO_KEY) === "1") startAudio().catch(() => {});
+            };
+            const cleanup = () => ["pointerdown", "keydown", "touchstart"].forEach((name) => document.removeEventListener(name, resume));
+            ["pointerdown", "keydown", "touchstart"].forEach((name) => document.addEventListener(name, resume));
+        });
+    }
 
     heroAudio.addEventListener("ended", () => {
         audioButton.setAttribute("aria-pressed", "false");

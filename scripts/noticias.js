@@ -11,7 +11,7 @@ const isConfigured = Boolean(config.supabaseUrl && config.supabaseAnonKey);
 const endpoint = `${(config.supabaseUrl || "").replace(/\/$/, "")}/rest/v1/comentarios`;
 const headers = {
     apikey: config.supabaseAnonKey || "",
-    Authorization: `Bearer ${config.supabaseAnonKey || ""}`,
+    ...(String(config.supabaseAnonKey || "").startsWith("eyJ") ? { Authorization: `Bearer ${config.supabaseAnonKey}` } : {}),
     "Content-Type": "application/json"
 };
 
