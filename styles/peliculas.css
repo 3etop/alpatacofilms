@@ -1313,12 +1313,12 @@ img {
     background: #242a28;
     box-shadow: none;
     filter: none;
-    object-fit: cover;
+    object-fit: contain;
     transition: filter 180ms ease;
 }
 
 .thumbnail .item[data-index="4"] img {
-    object-position: 100% center;
+    object-position: center;
 }
 
 .thumbnail .item.active {
