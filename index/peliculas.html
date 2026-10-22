@@ -22,12 +22,12 @@
         <link rel="manifest" href="../image/Favicon icon/site.webmanifest">
 
         <!-- Preloads -->
-        <link rel="preload" href="../styles/peliculas.css?v=4" as="style">
+        <link rel="preload" href="../styles/peliculas.css?v=5" as="style">
 
         <!-- Stylesheets -->
         <link rel="stylesheet" href="../Normalize/normalize.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="../styles/peliculas.css?v=4">
+        <link rel="stylesheet" href="../styles/peliculas.css?v=5">
         <link rel="stylesheet" href="../styles/site-shell.css">
 
         <!-- Title -->
@@ -62,7 +62,7 @@
             </nav>
     </header>
     <!-- Slider -->
-    <main class="slider" aria-label="Catálogo de películas">
+    <main class="slider" aria-label="Catálogo de películas" aria-roledescription="carrusel">
         <div class="film-catalog-mark">
             <p>Alpataco Films · Catálogo</p>
             <h1>Películas</h1>
@@ -104,7 +104,7 @@
             </div>
             <!-- Sin Clemencia -->
             <div class="item 2">
-                <img src="../image/nuevo contenido/Banner Horizontal Sin clemencia.webp" alt="Banner de Sin Clemencia" loading="lazy">
+                <img src="../image/optimizadas/banner-sin-clemencia.jpg" alt="Banner de Sin Clemencia" loading="lazy" decoding="async">
                 <div class="content">
                     <div class="vacio"></div>
                     <img src="../image/nuevo contenido/titulo 1 Sin Clemencia.png" alt="Título de Sin Clemencia" class="movie-title" loading="lazy">
@@ -249,23 +249,23 @@
         </div>
 
         <nav class="thumbnail" aria-label="Selecciona una película">
-            <button class="item active" type="button" data-index="0" aria-label="Ver No quiero estar sin ti" aria-pressed="true">
-                <img src="../image/nuevo contenido/vertical no quiero estar sin ti.webp" alt="Miniatura de No quiero estar sin ti" loading="lazy">
+            <button class="item active" type="button" data-index="0" data-title="No quiero estar sin ti" aria-label="Ver No quiero estar sin ti" aria-pressed="true">
+                <img src="../image/optimizadas/mini-no-quiero-estar-sin-ti.jpg" alt="" width="300" height="375" loading="lazy" decoding="async">
             </button>
-            <button class="item" type="button" data-index="1" aria-label="Ver Sin Clemencia" aria-pressed="false">
-                <img src="../image/nuevo contenido/vertical sin clemencia.webp" alt="Miniatura de Sin Clemencia" loading="lazy">
+            <button class="item" type="button" data-index="1" data-title="Sin Clemencia" aria-label="Ver Sin Clemencia" aria-pressed="false">
+                <img src="../image/optimizadas/mini-sin-clemencia.jpg" alt="" width="297" height="440" loading="lazy" decoding="async">
             </button>
-            <button class="item" type="button" data-index="2" aria-label="Ver Una llave hacia el pasado" aria-pressed="false">
-                <img src="../image/nuevo contenido/el precio de volver vertical.webp" alt="Miniatura de Una llave hacia el pasado" loading="lazy">
+            <button class="item" type="button" data-index="2" data-title="Una llave hacia el pasado" aria-label="Ver Una llave hacia el pasado" aria-pressed="false">
+                <img src="../image/optimizadas/mini-una-llave-hacia-el-pasado.jpg" alt="" width="297" height="440" loading="lazy" decoding="async">
             </button>
-            <button class="item" type="button" data-index="3" aria-label="Ver Un amor inevitable" aria-pressed="false">
-                <img src="../image/nuevo contenido/vertical un amor inevitable.webp" alt="Miniatura de Un amor inevitable" loading="lazy">
+            <button class="item" type="button" data-index="3" data-title="Un amor inevitable" aria-label="Ver Un amor inevitable" aria-pressed="false">
+                <img src="../image/optimizadas/mini-un-amor-inevitable.jpg" alt="" width="297" height="440" loading="lazy" decoding="async">
             </button>
-            <button class="item" type="button" data-index="4" aria-label="Ver ENA y el niño que vino del río" aria-pressed="false">
-                <img src="../image/nuevo contenido/poster ena y el niño que vino del rio vertical.png" alt="Miniatura de ENA y el niño que vino del río" loading="lazy">
+            <button class="item" type="button" data-index="4" data-title="Ena y el niño que vino del río" aria-label="Ver ENA y el niño que vino del río" aria-pressed="false">
+                <img src="../image/optimizadas/mini-ena.jpg" alt="" width="300" height="406" loading="lazy" decoding="async">
             </button>
-            <button class="item" type="button" data-index="5" aria-label="Ver Aislados" aria-pressed="false">
-                <img src="../image/nuevo contenido/Vertical aislados 1_11zon.webp" alt="Miniatura de Aislados" loading="lazy">
+            <button class="item" type="button" data-index="5" data-title="Aislados" aria-label="Ver Aislados" aria-pressed="false">
+                <img src="../image/optimizadas/mini-aislados.jpg" alt="" width="300" height="387" loading="lazy" decoding="async">
             </button>
         </nav>
     </main>
@@ -278,6 +278,6 @@
         </div>
     </div>
 
-    <script src="../scripts/peliculas.js" defer></script>
+    <script src="../scripts/peliculas.js?v=2" defer></script>
 </body>
 </html>

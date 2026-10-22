@@ -1531,7 +1531,164 @@ img {
         line-height: 1.5 !important;
     }
 
-    .slider .list .button button {
-        font-size: 1.125rem;
+}
+
+/* ===== Mejoras del slider: transiciones, miniaturas y accesibilidad ===== */
+.slider .list .item {
+    visibility: hidden;
+    transition: opacity 0.7s ease, visibility 0s linear 0.7s;
+}
+
+.slider .list .item.active {
+    visibility: visible;
+    transition: opacity 0.7s ease, visibility 0s;
+}
+
+.slider .list .item > img,
+.slider .list .item:first-child > .film-cover img {
+    transform: scale(1.06);
+    transition: transform 7s ease-out;
+}
+
+.slider .list .item.active > img,
+.slider .list .item.active:first-child > .film-cover img {
+    transform: scale(1);
+}
+
+@keyframes filmIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+}
+
+.slider .list .item.active .content > * {
+    animation: filmIn 0.6s ease-out 0.15s backwards;
+}
+
+.slider .list .item.active .content > *:nth-child(n+3) {
+    animation-delay: 0.25s;
+}
+
+.slider .list .item.active .content > *:nth-child(n+5) {
+    animation-delay: 0.35s;
+}
+
+.thumbnail .item,
+.arrows button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.thumbnail .item:focus-visible,
+.arrows button:focus-visible,
+.slider .list .button button:focus-visible,
+.close-modal:focus-visible {
+    outline: 2px solid #f3ad83;
+    outline-offset: 3px;
+}
+
+@media (min-width: 701px) and (min-height: 641px) {
+    .thumbnail {
+        width: min(740px, 78vw);
+        max-height: 176px;
+        gap: 10px;
+        padding: 10px;
+        scrollbar-width: thin;
+    }
+
+    .thumbnail .item {
+        position: relative;
+        width: 100px;
+        height: 148px;
+        flex: 0 0 100px;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .thumbnail .item:hover,
+    .thumbnail .item:focus-visible {
+        transform: translateY(-3px);
+    }
+
+    .thumbnail .item.active {
+        transform: translateY(-3px);
+    }
+
+    .thumbnail .item::after {
+        content: attr(data-title);
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 22px 6px 7px;
+        background: linear-gradient(0deg, rgba(8, 11, 10, 0.92), transparent);
+        color: #f3f0e8;
+        font-size: 0.68rem;
+        font-weight: 600;
+        line-height: 1.25;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+    }
+
+    .thumbnail .item:hover::after,
+    .thumbnail .item:focus-visible::after,
+    .thumbnail .item.active::after {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 700px) {
+    .thumbnail {
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .thumbnail::-webkit-scrollbar {
+        display: none;
+    }
+
+    .thumbnail .item {
+        scroll-snap-align: center;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+    }
+
+    .thumbnail .item.active {
+        opacity: 1;
+    }
+
+    .arrows button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slider .list .item,
+    .slider .list .item.active {
+        transition: none;
+    }
+
+    .slider .list .item > img,
+    .slider .list .item:first-child > .film-cover img {
+        transform: none !important;
+        transition: none;
+    }
+
+    .slider .list .item.active .content > * {
+        animation: none;
+    }
+
+    .thumbnail .item,
+    .thumbnail .item::after {
+        transition: none;
+    }
+
+    .thumbnail .item:hover,
+    .thumbnail .item:focus-visible,
+    .thumbnail .item.active {
+        transform: none;
     }
 }

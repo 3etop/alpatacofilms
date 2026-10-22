@@ -16,18 +16,33 @@ function setActiveSlide(index) {
     activeIndex = (index + slides.length) % slides.length;
 
     slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle("active", slideIndex === activeIndex);
+        const isActive = slideIndex === activeIndex;
+        slide.classList.toggle("active", isActive);
+        slide.setAttribute("aria-hidden", String(!isActive));
+        slide.setAttribute("role", "group");
+        slide.setAttribute("aria-roledescription", "diapositiva");
+        slide.setAttribute("aria-label", `${slideIndex + 1} de ${slides.length}`);
     });
 
     filmThumbnails.forEach((thumbnail, thumbnailIndex) => {
         const isActive = thumbnailIndex === activeIndex;
         thumbnail.classList.toggle("active", isActive);
         thumbnail.setAttribute("aria-pressed", String(isActive));
+        if (isActive) thumbnail.setAttribute("aria-current", "true");
+        else thumbnail.removeAttribute("aria-current");
     });
 
     if (filmCounter) filmCounter.textContent = String(activeIndex + 1).padStart(2, "0");
-    filmThumbnails[activeIndex]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const activeThumbnail = filmThumbnails[activeIndex];
+    const strip = activeThumbnail?.parentElement;
+    if (strip) {
+        const left = activeThumbnail.offsetLeft - (strip.clientWidth - activeThumbnail.offsetWidth) / 2;
+        strip.scrollTo({ left, behavior: reduceMotion ? "auto" : "smooth" });
+    }
 }
+
+setActiveSlide(activeIndex);
 
 nextButton?.addEventListener("click", () => setActiveSlide(activeIndex + 1));
 previousButton?.addEventListener("click", () => setActiveSlide(activeIndex - 1));
@@ -36,7 +51,9 @@ filmThumbnails.forEach((thumbnail, index) => {
     thumbnail.addEventListener("click", () => setActiveSlide(index));
 });
 
-slider?.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
+    if (modal?.style.display === "flex" || event.altKey || event.ctrlKey || event.metaKey) return;
+    if (event.target instanceof Element && event.target.closest("input, textarea, select, iframe")) return;
     if (event.key === "ArrowRight") setActiveSlide(activeIndex + 1);
     if (event.key === "ArrowLeft") setActiveSlide(activeIndex - 1);
 });
