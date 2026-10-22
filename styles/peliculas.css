@@ -1317,22 +1317,6 @@ img {
     transition: filter 180ms ease;
 }
 
-.thumbnail .item[data-index="4"] {
-    position: relative;
-}
-
-/* Muestra solo la mitad derecha del banner horizontal (abuela y niño) */
-.thumbnail .item[data-index="4"] img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 200%;
-    max-width: none;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
 .thumbnail .item.active {
     border-color: #f3ad83;
 }
